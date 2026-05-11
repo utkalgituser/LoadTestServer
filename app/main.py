@@ -52,7 +52,7 @@ def create_app() -> FastAPI:
     s = get_settings()
 
     app = FastAPI(
-        title="Lightweight HTTP Mock & Load-Test Server",
+        title="LoadTest Mock Server",
         description=(
             "Production-style FastAPI mock server for QA, integration testing, "
             "Postman sanity, and lightweight k6/JMeter load testing."
@@ -90,7 +90,7 @@ def create_app() -> FastAPI:
     @app.get("/", tags=["system"], summary="Service index")
     async def root():
         return {
-            "service": "mockserver",
+            "service": "loadtest-mockserver",
             "version": "1.0.0",
             "docs": "/docs",
             "openapi": "/openapi.json",

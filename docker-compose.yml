@@ -1,8 +1,8 @@
 services:
-  mockserver:
+  loadtest-mockserver:
     build: .
-    image: mockserver:latest
-    container_name: mockserver
+    image: loadtest-mockserver:latest
+    container_name: loadtest-mockserver
     restart: unless-stopped
     ports:
       - "8000:8000"

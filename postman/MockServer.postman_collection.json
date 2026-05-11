@@ -1,8 +1,8 @@
 {
   "info": {
-    "name": "MockServer",
-    "_postman_id": "ms-1.0.0",
-    "description": "Sanity + negative tests for FastAPI mock server",
+    "name": "LoadTest MockServer",
+    "_postman_id": "ltms-1.0.0",
+    "description": "Sanity + negative tests for LoadTest Mock Server (FastAPI)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [

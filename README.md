@@ -1,4 +1,4 @@
-# Lightweight HTTP Mock & Load-Test Server
+# LoadTest Mock Server
 
 Production-style FastAPI server for **API mocking, QA validation, integration testing, Postman sanity, and lightweight k6/JMeter load testing**. Runs on an 8 GB laptop. Docker-ready.
 
@@ -33,10 +33,10 @@ curl http://localhost:8000/health
 
 ### Share Docker image
 ```bash
-docker save mockserver:latest -o mockserver.tar
+docker save loadtest-mockserver:latest -o loadtest-mockserver.tar
 # recipient:
-docker load -i mockserver.tar
-docker run -d -p 8000:8000 --name mockserver mockserver:latest
+docker load -i loadtest-mockserver.tar
+docker run -d -p 8000:8000 --name loadtest-mockserver loadtest-mockserver:latest
 ```
 
 ---

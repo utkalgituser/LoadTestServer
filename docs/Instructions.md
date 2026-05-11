@@ -38,8 +38,8 @@ docker compose down
 
 Image is exportable:
 ```bash
-docker save mockserver:latest -o mockserver.tar
-# share the .tar; recipient: docker load -i mockserver.tar
+docker save loadtest-mockserver:latest -o loadtest-mockserver.tar
+# share the .tar; recipient: docker load -i loadtest-mockserver.tar
 ```
 
 ## Verify
