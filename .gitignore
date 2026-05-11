@@ -34,6 +34,9 @@ desktop.ini
 # PID
 *.pid
 
+# Docker image exports
+*.tar
+
 # Build outputs
 out/
 dist/
