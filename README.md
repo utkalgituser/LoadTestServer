@@ -25,18 +25,26 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2
 
 Open http://localhost:8000/docs
 
-### Docker
+### Docker (build locally)
 ```bash
 docker compose up -d --build
 curl http://localhost:8000/health
 ```
 
-### Share Docker image
+### Docker (pull from Docker Hub)
 ```bash
-docker save loadtest-mockserver:latest -o loadtest-mockserver.tar
+docker pull utkalbarik/loadtest-mockserver:latest
+docker run -d -p 8000:8000 --name loadtest-mockserver utkalbarik/loadtest-mockserver:latest
+```
+Image: https://hub.docker.com/r/utkalbarik/loadtest-mockserver
+Tags: `latest`, `1.0.0`
+
+### Share offline (tar)
+```bash
+docker save utkalbarik/loadtest-mockserver:latest -o loadtest-mockserver.tar
 # recipient:
 docker load -i loadtest-mockserver.tar
-docker run -d -p 8000:8000 --name loadtest-mockserver loadtest-mockserver:latest
+docker run -d -p 8000:8000 --name loadtest-mockserver utkalbarik/loadtest-mockserver:latest
 ```
 
 ---
