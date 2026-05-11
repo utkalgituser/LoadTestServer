@@ -1,0 +1,23 @@
+services:
+  mockserver:
+    build: .
+    image: mockserver:latest
+    container_name: mockserver
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+      - ./app/engine/scenarios.yaml:/app/app/engine/scenarios.yaml:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.5"

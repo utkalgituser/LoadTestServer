@@ -1,0 +1,86 @@
+{
+  "info": {
+    "name": "MockServer",
+    "_postman_id": "ms-1.0.0",
+    "description": "Sanity + negative tests for FastAPI mock server",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] } }
+    },
+    {
+      "name": "Metrics",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/metrics", "host": ["{{baseUrl}}"], "path": ["metrics"] } }
+    },
+    {
+      "name": "Mock Payment - Success",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Scenario", "value": "success" }
+        ],
+        "body": { "mode": "raw", "raw": "{\"transactionId\":\"TXN12345\",\"amount\":100.5,\"currency\":\"USD\"}" },
+        "url": { "raw": "{{baseUrl}}/mock/payment", "host": ["{{baseUrl}}"], "path": ["mock", "payment"] }
+      }
+    },
+    {
+      "name": "Mock Payment - Declined",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Scenario", "value": "declined" }
+        ],
+        "body": { "mode": "raw", "raw": "{\"transactionId\":\"TXN999\",\"amount\":50,\"currency\":\"USD\"}" },
+        "url": { "raw": "{{baseUrl}}/mock/payment", "host": ["{{baseUrl}}"], "path": ["mock", "payment"] }
+      }
+    },
+    {
+      "name": "Mock Payment - Timeout",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Scenario", "value": "timeout" }
+        ],
+        "body": { "mode": "raw", "raw": "{\"transactionId\":\"TXN777\",\"amount\":1,\"currency\":\"USD\"}" },
+        "url": { "raw": "{{baseUrl}}/mock/payment", "host": ["{{baseUrl}}"], "path": ["mock", "payment"] }
+      }
+    },
+    {
+      "name": "Status echo - 503",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/status?code=503", "host": ["{{baseUrl}}"], "path": ["status"], "query": [{ "key": "code", "value": "503" }] } }
+    },
+    {
+      "name": "Auth - missing header (401)",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/auth/mock", "host": ["{{baseUrl}}"], "path": ["auth", "mock"] } }
+    },
+    {
+      "name": "Auth - valid token (200)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/auth/mock", "host": ["{{baseUrl}}"], "path": ["auth", "mock"] }
+      }
+    },
+    {
+      "name": "Delay 2000ms",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/delay/mock?ms=2000", "host": ["{{baseUrl}}"], "path": ["delay", "mock"], "query": [{ "key": "ms", "value": "2000" }] } }
+    },
+    {
+      "name": "Failure - 500",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/failure/mock?code=500", "host": ["{{baseUrl}}"], "path": ["failure", "mock"], "query": [{ "key": "code", "value": "500" }] } }
+    },
+    {
+      "name": "Config - View",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/config", "host": ["{{baseUrl}}"], "path": ["config"] } }
+    },
+    {
+      "name": "Config - Reload",
+      "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/config/reload", "host": ["{{baseUrl}}"], "path": ["config", "reload"] } }
+    }
+  ]
+}

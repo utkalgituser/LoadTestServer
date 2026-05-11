@@ -1,0 +1,4 @@
+$ErrorActionPreference = "Stop"
+& "$PSScriptRoot\stop.ps1"
+Start-Sleep -Seconds 1
+& "$PSScriptRoot\start.ps1"

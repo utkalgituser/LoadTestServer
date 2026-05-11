@@ -1,0 +1,56 @@
+mocks:
+  - path: /mock/payment
+    methods: [POST]
+    description: Simulates payment processing
+    rules:
+      - when:
+          header: { X-Scenario: success }
+        respond:
+          status: 200
+          delay_ms: 50
+          body: { status: ok, message: payment processed }
+      - when:
+          header: { X-Scenario: declined }
+        respond:
+          status: 402
+          body: { status: declined, reason: insufficient funds }
+      - when:
+          header: { X-Scenario: timeout }
+        respond:
+          status: 504
+          delay_ms: 5000
+          body: { error: gateway timeout }
+      - when:
+          query: { status: "503" }
+        respond:
+          status: 503
+          body: { error: service unavailable }
+    default:
+      respond:
+        status: 200
+        body: { status: ok }
+
+  - path: /mock/users
+    methods: [GET, POST]
+    description: User CRUD mock
+    rules:
+      - when:
+          query: { status: "404" }
+        respond:
+          status: 404
+          body: { error: user not found }
+    default:
+      respond:
+        status: 200
+        body:
+          users:
+            - { id: 1, name: alice }
+            - { id: 2, name: bob }
+
+  - path: /mock/orders
+    methods: [GET, POST, PUT, DELETE]
+    description: Order management mock
+    default:
+      respond:
+        status: 200
+        body: { order_id: ORD-12345, status: confirmed }
